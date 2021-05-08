@@ -41,16 +41,29 @@ function compareGuess() {
             document.getElementById('inputBox').value = "";
         } else {
             document.getElementById('textOutput').innerHTML = `Correct! You got it in ${attempts} attempts.`;
+            gameEnded();
         }
     } else {
         if (userGuess > computerGuess) {
             document.getElementById('textOutput').innerHTML = "You lose! The number was "+ computerGuess;
             document.getElementById('inputBox').value = "";
+            gameEnded();
         } else if (userGuess < computerGuess) {
             document.getElementById('textOutput').innerHTML = "You lose! The number was "+ computerGuess;
             document.getElementById('inputBox').value = "";
+            gameEnded();
         } else {
             document.getElementById('textOutput').innerHTML = `Correct! You got it in ${attempts} attempts.`;
+            gameEnded();
         }
     }
+}
+
+function gameEnded() {
+    document.getElementById('newGameButton').style.display = "inline";
+    document.getElementById('inputBox').setAttribute('readonly', 'readonly');
+}
+
+function newGame() {
+    window.location.reload();
 }
