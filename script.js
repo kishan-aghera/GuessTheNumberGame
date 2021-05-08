@@ -1,6 +1,7 @@
 let computerGuess;
 let userGuesses = [];
 let attempts = 0;
+let maxGuesses;
 
 function init() {
     computerGuess = Math.floor(Math.random() * 100 + 1);
@@ -14,10 +15,12 @@ function startGameView() {
 }
 
 function easyMode() {
+    maxGuesses = 10;
     startGameView();
 }
 
 function hardMode() {
+    maxGuesses = 5;
     startGameView();
 }
 
@@ -29,13 +32,25 @@ function compareGuess() {
     attempts++;
     document.getElementById('attempts').innerHTML = attempts;
 
-    if (userGuess > computerGuess) {
-        document.getElementById('textOutput').innerHTML = "Your Guess is too high!";
-        document.getElementById('inputBox').value = "";
-    } else if (userGuess < computerGuess) {
-        document.getElementById('textOutput').innerHTML = "Your Guess is too low!";
-        document.getElementById('inputBox').value = "";
+    if (attempts < maxGuesses) {
+        if (userGuess > computerGuess) {
+            document.getElementById('textOutput').innerHTML = "Your Guess is too high!";
+            document.getElementById('inputBox').value = "";
+        } else if (userGuess < computerGuess) {
+            document.getElementById('textOutput').innerHTML = "Your Guess is too low!";
+            document.getElementById('inputBox').value = "";
+        } else {
+            document.getElementById('textOutput').innerHTML = `Correct! You got it in ${attempts} attempts.`;
+        }
     } else {
-        document.getElementById('textOutput').innerHTML = `Correct! You got it in ${attempts} attempts.`;
+        if (userGuess > computerGuess) {
+            document.getElementById('textOutput').innerHTML = "You lose! The number was "+ computerGuess;
+            document.getElementById('inputBox').value = "";
+        } else if (userGuess < computerGuess) {
+            document.getElementById('textOutput').innerHTML = "You lose! The number was "+ computerGuess;
+            document.getElementById('inputBox').value = "";
+        } else {
+            document.getElementById('textOutput').innerHTML = `Correct! You got it in ${attempts} attempts.`;
+        }
     }
 }
